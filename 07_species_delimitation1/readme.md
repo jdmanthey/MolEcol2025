@@ -231,8 +231,5 @@ Plot:
     plot(result_probmat2, pruned_trees[[1]])
 
 
-## Question #9 (write answers on back of sheet in any open space): What is/are the sister species (1 or more species) of (A) _Zosterops poliogastrus_ and of (B) _Turdus abyssinicus_ based on this phylogeny?
-
-
 
 
