@@ -66,9 +66,9 @@ The files should have been listed with the second command. If not, the directori
     sample.names
 
 <details>
-  <summary>Click to reveal the answer</summary>
+  <summary>Click to show sample names</summary>
   <p></p>
-  <p>The answer is 4.</p>
+  <IMG src="https://github.com/jdmanthey/MolEcol2025/blob/main/08_microbes/01_sample_names.png">
   <p></p>
 </details>
 
@@ -104,16 +104,23 @@ You can see we have file names for 11 individuals and that these names include t
     plotErrors(errR, nominalQ=TRUE)
 
 <details>
-  <summary>Click to show quality summaries</summary>
+  <summary>Click to show quality summaries for two individuals for Read 1</summary>
   <p></p>
-  <p>The answer is 4.</p>
+  <IMG src="https://github.com/jdmanthey/MolEcol2025/blob/main/08_microbes/02_error_R1.png">
   <p></p>
 </details>
 
 <details>
-  <summary>Click to show error plots</summary>
+  <summary>Click to show quality summaries for two individuals for Read 2</summary>
   <p></p>
-  <p>The answer is 4.</p>
+  <IMG src="https://github.com/jdmanthey/MolEcol2025/blob/main/08_microbes/03_error_R2.png">
+  <p></p>
+</details>
+
+<details>
+  <summary>Click to show error profile for Read 1</summary>
+  <p></p>
+  <IMG src="https://github.com/jdmanthey/MolEcol2025/blob/main/08_microbes/04_error_profile.png">
   <p></p>
 </details>
 
@@ -152,6 +159,20 @@ Save progress:
     # proportion of sequences not chimeric
     sum(seqtab.nochim)/sum(seqtab)
 
+<details>
+  <summary>Click to show table with lengths of sequences</summary>
+  <p></p>
+  <IMG src="https://github.com/jdmanthey/MolEcol2025/blob/main/08_microbes/05_seqtab.png">
+  <p></p>
+</details>
+
+<details>
+  <summary>Click to show proportion of sequences non-chimeric</summary>
+  <p></p>
+  <IMG src="https://github.com/jdmanthey/MolEcol2025/blob/main/08_microbes/06_proportion_chimeric.png">
+  <p></p>
+</details>
+
 ### 8. Summarize filtering
 
     # summarize the filtering
@@ -160,6 +181,13 @@ Save progress:
     colnames(track) <- c("input", "filtered", "denoised", "merged", "tabled", "nonchim")
     rownames(track) <- paste0(sapply(strsplit(sample.names, "_"), "[[", 1), "_", sapply(strsplit(sample.names, "_"), "[[", 3))
     track
+
+<details>
+  <summary>Table summarizing raw data filtering</summary>
+  <p></p>
+  <IMG src="https://github.com/jdmanthey/MolEcol2025/blob/main/08_microbes/07_track_table.png">
+  <p></p>
+</details>
 
 ### 9. Assign taxonomy
 
@@ -182,6 +210,13 @@ Save progress:
     dm <- dist.ml(phang.align)
     treeNJ <- NJ(dm)
     plot(treeNJ, show.tip.label=F)
+
+<details>
+  <summary>Show phylogenetic tree</summary>
+  <p></p>
+  <IMG src="https://github.com/jdmanthey/MolEcol2025/blob/main/08_microbes/08_tree.png">
+  <p></p>
+</details>
 
 Save progress:
 
@@ -218,11 +253,32 @@ Look at a summary of the numbers of unique sequence variants:
     
     summary(sample_sums(ps))
 
+<details>
+  <summary>Show summary of SVs per sample</summary>
+  <p></p>
+  <IMG src="https://github.com/jdmanthey/MolEcol2025/blob/main/08_microbes/09_sv_sums.png">
+  <p></p>
+</details>
+
 Find the unique phyla, classes, and families in the dataset:
 
     sort(get_taxa_unique(ps, "Phylum"))
     sort(get_taxa_unique(ps, "Class"))
     sort(get_taxa_unique(ps, "Family"))
+
+<details>
+  <summary>Show phyla found in samples</summary>
+  <p></p>
+  <IMG src="https://github.com/jdmanthey/MolEcol2025/blob/main/08_microbes/10_taxa_phylum.png">
+  <p></p>
+</details>
+
+<details>
+  <summary>Show classes found in samples</summary>
+  <p></p>
+  <IMG src="https://github.com/jdmanthey/MolEcol2025/blob/main/08_microbes/11_taxa_class.png">
+  <p></p>
+</details>
 
 Sample a random family:
 
@@ -285,6 +341,20 @@ You can look at what the summary tables look like here:
     i_phylum_output
     i_class_output
 
+<details>
+  <summary>Show summary table of phyla</summary>
+  <p></p>
+  <IMG src="https://github.com/jdmanthey/MolEcol2025/blob/main/08_microbes/12_phylum_table.png">
+  <p></p>
+</details>
+
+<details>
+  <summary>Show summary table of classes</summary>
+  <p></p>
+  <IMG src="https://github.com/jdmanthey/MolEcol2025/blob/main/08_microbes/13_class_table.png">
+  <p></p>
+</details>
+
 Now we can plot the phyla that are found in the samples:
 
     sample_number <- as.numeric(sample_data(ps)$Sample.number)
@@ -292,11 +362,25 @@ Now we can plot the phyla that are found in the samples:
     phyla$sample_number <- as.character(phyla$sample_number)
     ggplot(data=phyla, aes(x=sample_number, y=value, fill=variable)) + geom_bar(stat="identity") + scale_fill_manual(values=(turbo(length(unique(phyla$variable)))))
 
+<details>
+  <summary>Show phyla composition per sample</summary>
+  <p></p>
+  <IMG src="https://github.com/jdmanthey/MolEcol2025/blob/main/08_microbes/14_phyla_plot.png">
+  <p></p>
+</details>
+
 Do the same plot, but for classes:
 
     class <- melt(as.data.frame(cbind(sample_number, i_class)), id=c("sample_number"), value.name="class")
     class$sample_number <- as.character(class$sample_number)
     ggplot(data=class, aes(x=sample_number, y=value, fill=variable)) + geom_bar(stat="identity") + scale_fill_manual(values=(turbo(length(unique(class$variable)))))
+
+<details>
+  <summary>Show class composition per sample</summary>
+  <p></p>
+  <IMG src="https://github.com/jdmanthey/MolEcol2025/blob/main/08_microbes/15_class_plot.png">
+  <p></p>
+</details>
 
 ### 13. Alpha diversity
 
@@ -304,6 +388,13 @@ Here, we'll take a look at a couple ways you can investigate alpha diversity. Th
 package to look at many types of alpha diversity:
 
 	estimate_richness(ps)
+
+<details>
+  <summary>Show alpha diversity table</summary>
+  <p></p>
+  <IMG src="https://github.com/jdmanthey/MolEcol2025/blob/main/08_microbes/16_alpha_diversity_table.png">
+  <p></p>
+</details>
 
 However, we'll just be looking at a few to keep things simple. We'll save them to the object named 'alpha.'
 	
@@ -319,6 +410,12 @@ Let's plot some rarefactions curves to take one look at this factor:
   	class(rarecurve_table) <- "matrix"
   	rarecurve(rarecurve_table, step=50, cex=0.5, label=F, xlim=c(0,10000))
 
+<details>
+  <summary>Show rarefaction curve</summary>
+  <p></p>
+  <IMG src="https://github.com/jdmanthey/MolEcol2025/blob/main/08_microbes/17_rarefaction.png">
+  <p></p>
+</details>
 
 If we had the full datasets, the picture may look more completely sampled. Anyways, there are ways of using the full dataset
 and also ways of rarefying prior to estimating alpha diversity and beta diversity. We will not get into those methods in these
@@ -328,10 +425,24 @@ Let's plot a couple types of alpha diversity:
 
 	plot_richness(ps, x="Location", measures=c("Shannon", "Simpson"))
 
+<details>
+  <summary>Show Shannon and Simpson per sample</summary>
+  <p></p>
+  <IMG src="https://github.com/jdmanthey/MolEcol2025/blob/main/08_microbes/18_plot_richness.png">
+  <p></p>
+</details>
+
 We can also plot the relationships among each of the estimates of alpha diversity. Here, Observed_SVs = number of observed
 sequence variants and PD = phylogenetic diversity.
 
 	plot(alpha, pch=19, cex=1)
+
+<details>
+  <summary>Show comparisons of alpha diversity metrics</summary>
+  <p></p>
+  <IMG src="https://github.com/jdmanthey/MolEcol2025/blob/main/08_microbes/19_div_comparisons.png">
+  <p></p>
+</details>
 
 ### 14. Beta diversity
 
@@ -347,6 +458,13 @@ First, we'll make a plot of the Bray-Curtis distance:
 		Species.Location = species.location)
 	plot_ordination(ps, ord.nmds.bray, color="Species.Location", shape="Species.Location", title="Bray NMDS") + geom_point(size=3)
 
+<details>
+  <summary>Show Bray-Curtis</summary>
+  <p></p>
+  <IMG src="https://github.com/jdmanthey/MolEcol2025/blob/main/08_microbes/20_bray.png">
+  <p></p>
+</details>
+
 And unweighted Unifrac distance:
 
 	ord.unweighted.unifrac <- ordinate(ps, "PCoA", "unifrac", weighted=F)
@@ -356,7 +474,14 @@ And unweighted Unifrac distance:
 		Species.ID = species.id,
 		Species.Location = species.location)
 	plot_ordination(ps, ord.unweighted.unifrac, color="Species.Location", shape="Species.Location",title="Unweighted Unifrac PCoA") + geom_point(size=3)
-	
+
+<details>
+  <summary>Show unweighted Unifrac</summary>
+  <p></p>
+  <IMG src="https://github.com/jdmanthey/MolEcol2025/blob/main/08_microbes/21_unweighted_unifrac.png">
+  <p></p>
+</details>
+
 And weighted Unifrac distance:
 
 	ord.weighted.unifrac <- ordinate(ps, "PCoA", "unifrac", weighted=T)
@@ -366,3 +491,11 @@ And weighted Unifrac distance:
 		Species.ID = species.id,
 		Species.Location = species.location)
 	plot_ordination(ps, ord.weighted.unifrac, color="Species.Location", shape="Species.Location",title="Weighted Unifrac PCoA") + geom_point(size=3)
+
+<details>
+  <summary>Show weighted Unifrac</summary>
+  <p></p>
+  <IMG src="https://github.com/jdmanthey/MolEcol2025/blob/main/08_microbes/22_weighted_unifrac.png">
+  <p></p>
+</details>
+
